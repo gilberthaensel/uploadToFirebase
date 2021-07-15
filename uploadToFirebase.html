@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/style.css">
+    <title>Upload File to Firebase</title>
+</head>
+
+<body>
+    <label for="">File</label>
+    <form enctype="multipart/form-data">
+        <input type="file" id="file" accept="application/pdf, image/*"></input><br>
+        <button type="button" onclick="upload()">Upload</button>
+    </form>
+    <div class="progress-bar"></div>
+    <p id="progress-notif"></p>
+    <div class="show-file" id="show-file"></div>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-analytics.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-storage.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        var firebaseConfig = {
+            apiKey: "AIzaSyDraFFr_DIqR9uoQWuzzXqZr4A2T_-ckhA",
+            authDomain: "task1-7c83d.firebaseapp.com",
+            projectId: "task1-7c83d",
+            storageBucket: "task1-7c83d.appspot.com",
+            messagingSenderId: "657942298822",
+            appId: "1:657942298822:web:4fa250a1c659003aced7c7",
+            measurementId: "G-4ZL3EFZB1G"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+    </script>
+    <script type="text/javascript" src="assets/script.js"></script>
+</body>
+
+</html>
