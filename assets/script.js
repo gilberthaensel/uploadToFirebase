@@ -20,6 +20,9 @@ validateFile = () => {
   const fileExtension = fileName
     .substring(fileName.lastIndexOf(".") + 1, fileName.length)
     .toLowerCase();
+  // console.log(fileName.lastIndexOf(".")+1);
+  // console.log(fileName.length);
+  // console.log(fileExtension.length);
   if (!acceptedExtension.includes(fileExtension)) {
     alert("please upload only jpg, jpeg, png, and pdf files");
     document.getElementById("file").value = null;
@@ -29,6 +32,12 @@ document.getElementById("file").addEventListener("change", validateFile);
 
 //uploading to firebase
 upload = () => {
+  //check input file
+  if(document.getElementById("file").value == ""){
+    alert("No File")
+    return false
+  }
+
   //get file
   var file = document.getElementById("file").files[0];
 
@@ -47,6 +56,9 @@ upload = () => {
   const progressBarElement = document.querySelector(".progress-bar");
   const progressNotifElement = document.getElementById("progress-notif");
 
+  progressBarElement.classList.remove("bg-success");
+  progressBarElement.classList.add("bg-danger");
+
   uploadTask.on(
     "state_changed",
     (snapshot) => {
@@ -54,8 +66,8 @@ upload = () => {
       //state change event progress
       //get task progress using number of bytes uploaded and total
       var progress = snapshot.bytesTransferred / snapshot.totalBytes;
-      progressBarElement.style.transform = `scaleX(${progress})`;
-      progressNotifElement.innerHTML = progress * 100 + "%";
+      progressBarElement.style.width = progress * 100 + "%";
+      progressNotifElement.innerHTML = Math.floor(progress * 100) + "%";
       console.log("upload is " + progress * 100 + " done");
     },
     (error) => {
@@ -73,8 +85,9 @@ upload = () => {
         //show image
         if (acceptedImgExtension.includes(fileExtension)) {
           var img = document.createElement("img");
+          img.style.objectFit = "contain";
           img.style.width = "100%";
-          img.style.height = "100%";
+          img.style.height = "500px";
           img.src = downloadURL;
           container.appendChild(img);
         }
@@ -82,12 +95,26 @@ upload = () => {
         else if (fileExtension == "pdf") {
           var pdf = document.createElement("embed");
           pdf.style.width = "100%";
-          pdf.style.height = "100%";
+          pdf.style.height = "500px";
           pdf.src = downloadURL;
           container.appendChild(pdf);
         }
+        progressBarElement.classList.remove("bg-danger");
+        progressBarElement.classList.add("bg-success");
       });
-      progressBarElement.classList.add("ended");
     }
   );
+};
+
+//drag and drop file
+const dropContainer = document.getElementById("dropContainer")
+const fileInput = document.getElementById("file")
+
+dropContainer.ondragover = dropContainer.ondragenter = function (evt) {
+  evt.preventDefault();
+};
+
+dropContainer.ondrop = function (evt) {
+  fileInput.files = evt.dataTransfer.files;
+  evt.preventDefault();
 };

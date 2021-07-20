@@ -6,29 +6,41 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/bootstrap.css">
     <title>Upload File to Firebase</title>
 </head>
 
 <body>
-    <label for="">File</label>
-    <form enctype="multipart/form-data">
-        <input type="file" id="file" accept="application/pdf, image/*"></input><br>
-        <button type="button" onclick="upload()">Upload</button>
-    </form>
-    <div class="progress-bar"></div>
-    <p id="progress-notif"></p>
-    <div class="show-file" id="show-file"></div>
+    <div class="container mt-4" id="dropContainer">
+        <div class="row">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">Upload File</div>
+                    <form class="row" enctype="multipart/form-data">
+                        <div class="col">
+                            <input class="form-control d-inline-flex" type="file" id="file" accept="application/pdf, image/*"></input>
+                        </div>
+                        <div class="col">
+                            <button class="btn btn-primary" type="button" onclick="upload()">Upload</button>
+                        </div>
+                    </form>
+                    <div class="progress mt-3">
+                        <div class="progress-bar progress-bar-transition bg-danger" id="progress-bar"></div>
+                    </div>
+                    <p id="progress-notif"></p>
+                    <div class="show-file">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
 
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
-
-    <!-- TODO: Add SDKs for Firebase products that you want to use
+        <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
-    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-analytics.js"></script>
-
-    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-storage.js"></script>
-
-    <script type="text/javascript" src="assets/script.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-analytics.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-storage.js"></script>
+        <script type="text/javascript" src="assets/script.js"></script>
 </body>
 
 </html>
