@@ -33,9 +33,9 @@ document.getElementById("file").addEventListener("change", validateFile);
 //uploading to firebase
 upload = () => {
   //check input file
-  if(document.getElementById("file").value == ""){
-    alert("No File")
-    return false
+  if (document.getElementById("file").value == "") {
+    alert("No File");
+    return false;
   }
 
   //get file
@@ -77,28 +77,28 @@ upload = () => {
     () => {
       //handle success
       uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
-        var fileExtension = file.name
-          .substring(file.name.lastIndexOf(".") + 1, file.name.length)
-          .toLowerCase();
-        const container = document.querySelector(".show-file");
-        const acceptedImgExtension = ["png", "jpg", "jpeg"];
-        //show image
-        if (acceptedImgExtension.includes(fileExtension)) {
-          var img = document.createElement("img");
-          img.style.objectFit = "contain";
-          img.style.width = "100%";
-          img.style.height = "500px";
-          img.src = downloadURL;
-          container.appendChild(img);
-        }
-        //show pdf
-        else if (fileExtension == "pdf") {
-          var pdf = document.createElement("embed");
-          pdf.style.width = "100%";
-          pdf.style.height = "500px";
-          pdf.src = downloadURL;
-          container.appendChild(pdf);
-        }
+        // var fileExtension = file.name
+        //   .substring(file.name.lastIndexOf(".") + 1, file.name.length)
+        //   .toLowerCase();
+        // const container = document.querySelector(".show-file");
+        // const acceptedImgExtension = ["png", "jpg", "jpeg"];
+        // //show image
+        // if (acceptedImgExtension.includes(fileExtension)) {
+        //   var img = document.createElement("img");
+        //   img.style.objectFit = "contain";
+        //   img.style.width = "100%";
+        //   img.style.height = "500px";
+        //   img.src = downloadURL;
+        //   container.appendChild(img);
+        // }
+        // //show pdf
+        // else if (fileExtension == "pdf") {
+        //   var pdf = document.createElement("embed");
+        //   pdf.style.width = "100%";
+        //   pdf.style.height = "500px";
+        //   pdf.src = downloadURL;
+        //   container.appendChild(pdf);
+        // }
         progressBarElement.classList.remove("bg-danger");
         progressBarElement.classList.add("bg-success");
       });
@@ -107,8 +107,8 @@ upload = () => {
 };
 
 //drag and drop file
-const dropContainer = document.getElementById("dropContainer")
-const fileInput = document.getElementById("file")
+const dropContainer = document.getElementById("dropContainer");
+const fileInput = document.getElementById("file");
 
 dropContainer.ondragover = dropContainer.ondragenter = function (evt) {
   evt.preventDefault();
@@ -116,5 +116,39 @@ dropContainer.ondragover = dropContainer.ondragenter = function (evt) {
 
 dropContainer.ondrop = function (evt) {
   fileInput.files = evt.dataTransfer.files;
+  validateFile()
+  showImg()
   evt.preventDefault();
 };
+
+//show image in dropContainer
+showImg = () => {
+  const textdropFiles = document.getElementById("dropFiles")
+  // if(textdropFiles){
+  //   document.getElementById("dropFiles").remove()
+  // }
+  const acceptedExtensionImg = ["jpg", "jpeg", "png"];
+  const fileName = document.getElementById("file").files[0].name;
+  const fileExtension = fileName
+    .substring(fileName.lastIndexOf(".") + 1, fileName.length)
+    .toLowerCase();
+  var img = document.getElementById("imgShow");
+  var pdf = document.getElementById("pdfShow");
+  if (acceptedExtensionImg.includes(fileExtension)) {
+    pdf.style.display = "none"
+    img.style.display = "inline"
+    img.style.objectFit = "contain";
+    img.style.width = "100%";
+    img.style.height = "300px";
+    img.src = URL.createObjectURL(document.getElementById("file").files[0]);
+  } else if (fileExtension == "pdf") {
+    img.style.display= "none"
+    pdf.style.display= "inline"
+    pdf.style.width = "100%";
+    pdf.style.height = "300px";
+    pdf.src = URL.createObjectURL(document.getElementById("file").files[0]);
+  }
+  textdropFiles.style.color = "#000000"
+  textdropFiles.innerHTML = fileName
+};
+document.getElementById("file").addEventListener("change", showImg);
