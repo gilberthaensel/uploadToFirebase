@@ -11,20 +11,19 @@
 </head>
 
 <body>
-    <div class="card col-6 m-auto">
+    <div class="card col-6 m-auto mt-1">
         <div class="card-header">
             <div class="card-title">Upload File</div>
         </div>
         <div class="card-body" id="dropContainer">
             <div class="border-dashed text-center" id="imgContainer">
                 <p id="dropFiles">Drop files here...</p>
-
             </div>
 
             <form class="d-flex flex-row justify-content-evenly mt-2 " enctype="multipart/form-data">
-                    <input class="form-control d-inline-flex" type="file" id="file"
-                        accept="application/pdf, image/*" placeholder="asd"></input>
-                    <button class="btn btn-primary" type="button" onclick="upload()">Upload</button>
+                <input type="file" style="display:none;" id="file" name="uploadfile" accept="application/pdf, image/*">
+                <label for="file" class="btn btn-secondary">Choose File</label>
+                <button class="btn btn-primary" type="button" onclick="upload()">Upload</button>
             </form>
             <div class="progress mt-3">
                 <div class="progress-bar progress-bar-transition bg-danger" id="progress-bar"></div>
@@ -36,6 +35,7 @@
             </div>
         </div>
     </div>
+
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
 
