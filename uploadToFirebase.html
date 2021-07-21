@@ -11,36 +11,39 @@
 </head>
 
 <body>
-    <div class="container mt-4" id="dropContainer">
-        <div class="row">
-            <div class="card">
-                <div class="card-body">
-                    <div class="card-title">Upload File</div>
-                    <form class="row" enctype="multipart/form-data">
-                        <div class="col">
-                            <input class="form-control d-inline-flex" type="file" id="file" accept="application/pdf, image/*"></input>
-                        </div>
-                        <div class="col">
-                            <button class="btn btn-primary" type="button" onclick="upload()">Upload</button>
-                        </div>
-                    </form>
-                    <div class="progress mt-3">
-                        <div class="progress-bar progress-bar-transition bg-danger" id="progress-bar"></div>
-                    </div>
-                    <p id="progress-notif"></p>
-                    <div class="show-file">
-                    </div>
-                </div>
+    <div class="card col-6 m-auto">
+        <div class="card-header">
+            <div class="card-title">Upload File</div>
+        </div>
+        <div class="card-body" id="dropContainer">
+            <div class="border-dashed text-center" id="imgContainer">
+                <p id="dropFiles">Drop files here...</p>
+
+            </div>
+
+            <form class="d-flex flex-row justify-content-evenly mt-2 " enctype="multipart/form-data">
+                    <input class="form-control d-inline-flex" type="file" id="file"
+                        accept="application/pdf, image/*" placeholder="asd"></input>
+                    <button class="btn btn-primary" type="button" onclick="upload()">Upload</button>
+            </form>
+            <div class="progress mt-3">
+                <div class="progress-bar progress-bar-transition bg-danger" id="progress-bar"></div>
+            </div>
+            <p id="progress-notif"></p>
+            <div id="show-file">
+                <img class="zerowh" src="" alt="" id="imgShow">
+                <embed class="zerowh" src="" alt="" id="pdfShow">
             </div>
         </div>
-        <!-- The core Firebase JS SDK is always required and must be listed first -->
-        <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
+    </div>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
 
-        <!-- TODO: Add SDKs for Firebase products that you want to use
+    <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
-        <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-analytics.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-storage.js"></script>
-        <script type="text/javascript" src="assets/script.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-storage.js"></script>
+    <script type="text/javascript" src="assets/script.js"></script>
 </body>
 
 </html>
